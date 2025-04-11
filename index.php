@@ -98,6 +98,13 @@ $movies = [
     ]
 ];
 
+$descriptionCharacterLimit = 100;
+
+
+function slug($title)
+{
+    return strtolower(str_replace(' ', '-', trim($title)));
+}
 
 ?>
 
@@ -110,29 +117,11 @@ $movies = [
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <title>Blog App</title>
+    <title>Movies App</title>
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-            <div class="container">
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                    <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <?php include_once('./partials/header.php') ?>
     <main>
         <div class="container">
             <div class="row">
@@ -157,13 +146,15 @@ $movies = [
                                 echo "<div class='card m-2 col-3' style='width: 18rem;'>
                                 <img src=" . $movie['images'][0] . " class='card-img-top' alt='{$movie['title']}'>
                                 <div class='card-body'>
-                                    <h5 class='card-title'>{$movie['title']}</h5>
-                                    <p class='card-text'>" . substr(ucwords($movie['description']), 0, 50) . "...</p>
-                                    <a href='#' class='btn btn-primary'>More</a>
+                                    <h5 class='card-title'>" . ucwords($movie['title']) . "</h5>
+                                    <p class='card-text'>" . (strlen($movie['description']) > $descriptionCharacterLimit ?
+                                    substr(ucwords($movie['description']), 0, $descriptionCharacterLimit) . '...'
+                                    : ucwords($movie['description'])) . "</p>
+                                    <a href='details.php?title=" . slug($movie["title"]) . "' class='btn btn-primary'>Read More</a>
                                     <div class='mt-2'>
                                         <span class='badge bg-primary'>100 likes</span>
                                         <span class='badge bg-primary'> 0 comments</span>
-                                        <span class='badge bg-secondary'>1 share</span>
+                                        <span class='badge bg-warning'>" . $movie["imdb_rating"] . "</span>
                                     </div>
                                 </div>
                             </div>";
