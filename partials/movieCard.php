@@ -6,7 +6,7 @@ foreach ($movies as $movieList):
             <div class='card-body'>
                 <h5 class='card-title'><?php echo ucwords($movie['title']) ?></h5>
                 <p class='card-text'><?php echo (description($movie)) ?></p>
-                <a href='details.php?title="<?php echo slug($movie["title"]) ?>' class='btn btn-primary'>Read More</a>
+                <a href="details.php?title=<?php echo slug($movie['title']) ?>" class='btn btn-primary'>Read More</a>
                 <div class='mt-2'>
                     <span class='badge bg-primary'>Genre: <?php echo $movie['genre'] ?></span>
                     <span class='badge bg-warning'><?php echo $movie["imdb_rating"] ?></span>

@@ -2,6 +2,7 @@
 
 require './libs/variables.php';
 require './libs/functions.php';
+$title = "Home";
 ?>
 
 <?php include_once './partials/head.php' ?>
@@ -13,10 +14,11 @@ require './libs/functions.php';
                 <div class="categories my-2">
                     <ul class="list-group">
                         <?php
-                        for ($i = 0; $i < count($categoryArray); $i++) {
-                            echo "<li class='list-group-item'>$categoryArray[$i]</li>";
-                        }
-                        ?>
+                        foreach ($categoryArray as $category): ?>
+                            <li class='list-group-item'><a
+                                    href="./pages/movies.php?category=<?php echo strtolower($category) ?>"><?php echo $category ?></a>
+                            </li>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </div>
