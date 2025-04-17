@@ -2,14 +2,14 @@
 
 $title = "Movies";
 
-require './libs/variables.php';
-require './libs/functions.php';
+require 'libs/variables.php';
+require 'libs/functions.php';
 
 
 ?>
 
-<?php include './partials/head.php' ?>
-<?php include './partials/header.php' ?>
+<?php include 'partials/head.php' ?>
+<?php include 'partials/header.php' ?>
 
 
 <main>
@@ -34,7 +34,7 @@ require './libs/functions.php';
                         <?php
                         foreach ($categoryArray as $category): ?>
                             <li class='list-group-item'><a
-                                    href="./movies.php?category=<?php echo strtolower($category) ?>"><?php echo $category ?></a>
+                                    href="movies.php?category=<?php echo strtolower($category) ?>"><?php echo $category ?></a>
                             </li>
                         <?php endforeach; ?>
                     </ul>
@@ -42,11 +42,11 @@ require './libs/functions.php';
             </div>
             <div class="col-10">
                 <div class="row">
-                    <?php include_once './partials/movieCard.php' ?>
+                    <?php include_once 'partials/movieCard.php' ?>
                 </div>
             </div>
         </div>
 </main>
 
 
-<?php include './partials/footer.php' ?>
+<?php include 'partials/footer.php' ?>
