@@ -1,13 +1,14 @@
 <?php
-function description($movie)
+
+declare(strict_types=1);
+function shortenText($text, $limit)
 {
-    global $descriptionCharacterLimit;
-    return strlen($movie['description']) > $descriptionCharacterLimit ?
-        substr(ucwords($movie['description']), 0, $descriptionCharacterLimit) . '...'
-        : ucwords($movie['description']);
+    return strlen($text) > $limit ?
+        substr(ucwords($text), 0, $limit) . '...'
+        : ucwords($text);
 }
 
-$descriptionCharacterLimit = 75;
+
 
 function insertBlog(string $title, string $description, string $imageUrl, string $slug, float $imdb_rating, string $release_date, int $running_time, bool $isActive)
 {
@@ -33,4 +34,54 @@ function insertBlog(string $title, string $description, string $imageUrl, string
 
     mysqli_close($connection);
     return $result;
+}
+
+function selectBlog()
+{
+    require 'settings.php';
+
+    $query = "Select title, description, imageUrl, slug, imdb_rating, isActive from Blog";
+    $result = mysqli_query($connection, $query);
+    mysqli_close($connection);
+
+    return $result;
+}
+
+function selectCategories()
+{
+    require 'settings.php';
+
+    $query = "Select * from Categories";
+    $result = mysqli_query($connection, $query);
+    mysqli_close($connection);
+
+    return $result;
+}
+
+function updateCategory(int $id, string $category_name, int $isActive)
+{
+    require 'settings.php';
+
+    $query = "UPDATE `categories` SET `category_name`='$category_name',`isActive`=$isActive WHERE id=$id";
+    $result = mysqli_query($connection, $query);
+    mysqli_close($connection);
+}
+
+function deleteCategory($id)
+{
+    require 'settings.php';
+
+    $query = "DELETE FROM `categories` WHERE id=$id";
+    $result = mysqli_query($connection, $query);
+    mysqli_close($connection);
+}
+
+function addCategory(string $category_name, int $isActive)
+{
+    require 'settings.php';
+
+    $query = "INSERT INTO `categories`(`category_name`, `isActive`) VALUES ('$category_name',$isActive)";
+    $result = mysqli_query($connection, $query);
+    mysqli_close($connection);
+
 }

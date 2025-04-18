@@ -34,7 +34,13 @@ if (isset($_POST['login'])) {
                         <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="movies.php">Movies</a>
+                        <a class="nav-link" href="create_blog.php">Create Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categories.php">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.php">Blog</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
