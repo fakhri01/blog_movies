@@ -12,7 +12,7 @@
                     <input type="text" class="form-control" id="categoryName" name="categoryName" required>
                 </div>
                 <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="isActive" name="isActive" checked>
+                    <input type="checkbox" class="form-check-input" id="isActive" name="isActive" >
                     <label class="form-check-label" for="isActive">Active</label>
                 </div>
             </div>

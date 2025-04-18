@@ -6,7 +6,7 @@ require 'libs/variables.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" and isset($_POST["editCategory"])) {
     $id = $_POST["id"] ?? null;
-    $categoryName = trim($_POST["categoryName"]) ?? null;
+    $categoryName = htmlspecialchars(trim($_POST["categoryName"])) ?? null;
     $isActive = isset($_POST["isActive"]) ? 1 : 0;
 
 
@@ -37,10 +37,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["deleteCategory"])) {
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["addCategory"])) {
-    $categoryName = $_POST["category_name"] ?? null;
-    if ($id !== null) {
-        deleteCategory($id);
-        $errorMessage = "Category deleted!";
+    $categoryName = htmlspecialchars(trim($_POST["categoryName"])) ?? null;
+    $isActive = isset($_POST["isActive"]) ? 1 : 0;
+    if ($categoryName !== '' and $categoryName !== null) {
+        addCategory($categoryName, $isActive);
+        $errorMessage = "Category added successfully!";
+        $errorType = 'success';
+    }else{
+        $errorMessage = 'An error occurred!';
         $errorType = 'danger';
     }
 }
