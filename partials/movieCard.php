@@ -13,6 +13,7 @@
                         <a href="details.php?title=<?php echo $row['slug']; ?>" class='btn btn-primary'>Read More</a>
                         <a href="edit-blog.php?title=<?php echo $row['slug']; ?>" class='btn btn-secondary'>Edit Blog</a>
                         <div class='mt-2'>
+                            <span class='badge bg-dark'>Genre: <?php echo ucwords($row["category_name"]); ?></span>
                             <span class='badge bg-warning'><?php echo $row["imdb_rating"]; ?></span>
                         </div>
                     </div>

@@ -17,7 +17,7 @@ function controlInput($input)
     return $input;
 }
 
-function insertBlog(string $title, string $description, string $imageUrl, string $slug, float $imdb_rating, string $release_date, int $running_time, bool $isActive)
+function insertBlog(string $title, string $description, string $imageUrl, string $slug, float $imdb_rating, string $release_date, int $running_time, bool $isActive, int $category_id)
 {
     require 'settings.php';
 
@@ -30,8 +30,8 @@ function insertBlog(string $title, string $description, string $imageUrl, string
 
     $isActive = $isActive ? 1 : 0;
 
-    $query = "INSERT INTO `blog` (`title`, `description`, `imageUrl`, `slug`, `imdb_rating`, `release_date`, `running_time`, `isActive`)
-              VALUES ('$title', '$description', '$imageUrl', '$slug', $imdb_rating, '$release_date', $running_time, $isActive)";
+    $query = "INSERT INTO `blog` (`title`, `description`, `imageUrl`, `slug`, `imdb_rating`, `release_date`, `running_time`, `isActive`, `category_id`)
+              VALUES ('$title', '$description', '$imageUrl', '$slug', $imdb_rating, '$release_date', $running_time, $isActive, $category_id)";
 
     $result = mysqli_query($connection, $query);
 
@@ -47,7 +47,7 @@ function selectBlog()
 {
     require 'settings.php';
 
-    $query = "Select title, description, imageUrl, slug, imdb_rating, isActive from Blog order by title desc";
+    $query = "Select b.id, b.title, b.description, b.imageUrl, b.slug, b.imdb_rating, b.isActive, c.category_name from Blog b inner join categories c on b.category_id=c.id order by title desc";
     $result = mysqli_query($connection, $query);
     mysqli_close($connection);
 
@@ -58,7 +58,7 @@ function selectBlogByTitle(string $title)
 {
     require 'settings.php';
 
-    $query = "Select title, description, imageUrl, imdb_rating, release_date, running_time, isActive from Blog Where slug='$title'";
+    $query = "Select b.title, b.description, b.imageUrl, b.imdb_rating, b.release_date, b.running_time, b.isActive, c.category_name from Blog b inner join categories c on b.category_id=c.id Where slug='$title'";
     $result = mysqli_query($connection, $query);
     mysqli_close($connection);
 

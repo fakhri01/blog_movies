@@ -41,6 +41,18 @@ include_once 'partials/header.php';
             <input type="url" class="form-control" id="imageUrl" name="imageUrl" value="<?php echo $row["imageUrl"] ?>">
         </div>
 
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">Genre</label>
+            <select class="form-select" id="inputGroupSelect01">
+                <option>Choose...</option>
+                <?php $result = selectCategories();
+                while ($c_row = mysqli_fetch_assoc($result)):
+                    ?>
+                    <option value="<?php echo $c_row["category_name"] ?>" <?php echo $row["category_name"] == $c_row["category_name"] ? 'selected' : '' ?>><?php echo ucwords($c_row["category_name"]) ?></option>
+                <?php endwhile; ?>
+            </select>
+        </div>
+
         <div class="mb-3">
             <label for="imdb_rating" class="form-label">IMDB Rating</label>
             <input type="number" step="0.1" min="0" max="10" class="form-control" id="imdb_rating" name="imdb_rating"

@@ -11,7 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $release_date = $_POST["release_date"];
     $running_time = intval($_POST["running_time"]);
     $isActive = isset($_POST["isActive"]) ? true : false;
-    insertBlog($title, $description, $imageUrl, $slug, $imdb_rating, $release_date, $running_time, $isActive);
+    $category_id = intval($_POST["category_id"]);
+    insertBlog($title, $description, $imageUrl, $slug, $imdb_rating, $release_date, $running_time, $isActive, $category_id);
 
 }
 
@@ -40,6 +41,19 @@ include_once 'partials/header.php';
         <div class="mb-3">
             <label for="imageUrl" class="form-label">Image URL</label>
             <input type="url" class="form-control" id="imageUrl" name="imageUrl">
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">Genre</label>
+            <select class="form-select" id="inputGroupSelect01" name="category_id">
+                <option selected>Choose...</option>
+                <?php $result = selectCategories();
+                while ($c_row = mysqli_fetch_assoc($result)):
+                    ?>
+                    <option value="<?php echo $c_row["id"] ?>">
+                        <?php echo ucwords($c_row["category_name"]) ?>
+                    </option>
+                <?php endwhile; ?>
+            </select>
         </div>
 
         <div class="mb-3">

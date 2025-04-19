@@ -26,7 +26,8 @@ if (!$row) {
         alt="<?php echo $row["title"] ?>">
     </div>
     <div class="col-md-8">
-      <h2 class="mb-3"><?php echo $row["title"] ?></h2>
+      <h2 class="mb-3 d-flex justify-content-between"><?php echo $row["title"] ?> <a href="edit-blog.php?title=<?php echo $title; ?>" class='btn btn-secondary'>Edit Blog</a></h2>
+      <p><strong>Genre:</strong> <?php echo ucwords($row["category_name"]) ?></p>
       <p><strong>Release Date:</strong> <?php echo $row["release_date"] ?></p>
       <p><strong>Running Time:</strong> <?php echo $row["running_time"] ?> mins</p>
       <p><strong>Rating:</strong> <?php echo number_format($row["imdb_rating"], 1) ?> / 10</p>
