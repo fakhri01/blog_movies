@@ -29,13 +29,10 @@ require 'libs/functions.php';
 
     <div class="container">
         <div class="row">
-            <?php include_once 'partials/category-menu.php' ?>
-            <div class="col-10">
-                <div class="row">
-                    <?php include_once 'partials/movieCard.php' ?>
-                </div>
-            </div>
+            <?php include_once 'partials/category-menu.php'; ?>
+            <?php include_once 'partials/movieCard.php'; ?>
         </div>
+    </div>
 </main>
 
 

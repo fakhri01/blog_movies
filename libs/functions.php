@@ -1,14 +1,21 @@
 <?php
 
 declare(strict_types=1);
-function shortenText($text, $limit)
+function safeDecodeAndShorten($html, $limit = 75)
 {
-    return strlen($text) > $limit ?
-        substr(ucwords($text), 0, $limit) . '...'
-        : ucwords($text);
+    $decoded = htmlspecialchars_decode($html);
+    $plain = strip_tags($decoded);
+    if (strlen($plain) <= $limit)
+        return $decoded;
+    return mb_substr($plain, 0, $limit) . '...';
 }
 
-
+function controlInput($input)
+{
+    $input = htmlspecialchars($input);
+    $input = stripslashes($input);
+    return $input;
+}
 
 function insertBlog(string $title, string $description, string $imageUrl, string $slug, float $imdb_rating, string $release_date, int $running_time, bool $isActive)
 {
@@ -40,7 +47,18 @@ function selectBlog()
 {
     require 'settings.php';
 
-    $query = "Select title, description, imageUrl, slug, imdb_rating, isActive from Blog";
+    $query = "Select title, description, imageUrl, slug, imdb_rating, isActive from Blog order by title desc";
+    $result = mysqli_query($connection, $query);
+    mysqli_close($connection);
+
+    return $result;
+}
+
+function selectBlogByTitle(string $title)
+{
+    require 'settings.php';
+
+    $query = "Select title, description, imageUrl, imdb_rating, release_date, running_time, isActive from Blog Where slug='$title'";
     $result = mysqli_query($connection, $query);
     mysqli_close($connection);
 

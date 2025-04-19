@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["addCategory"])) {
         addCategory($categoryName, $isActive);
         $errorMessage = "Category added successfully!";
         $errorType = 'success';
-    }else{
+    } else {
         $errorMessage = 'An error occurred!';
         $errorType = 'danger';
     }
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["addCategory"])) {
                 <?php echo $errorMessage; ?>
             </div>
         <?php endif ?>
-        <table class="table w-50 m-auto ">
+        <table class="table w-50 m-auto mb-5">
             <thead class="table-dark">
                 <tr>
                     <th>#</th>
@@ -82,10 +82,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["addCategory"])) {
             <tbody>
                 <?php
                 $result = selectCategories();
+                $num = 1;
                 while ($row = mysqli_fetch_assoc($result)):
                     ?>
                     <tr>
-                        <td><?php echo $row["id"]; ?></td>
+                        <td><?php echo $num; ?></td>
                         <td class="w-100"><?php echo ucfirst($row["category_name"]); ?></td>
                         <td class="fs-5"><?php if ($row["isActive"]): ?> <i class=" bi bi-check-lg"></i><?php else: ?><i
                                     class="bi bi-x"></i><?php endif; ?></td>
@@ -96,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["addCategory"])) {
                         <?php include 'partials/category-delete-modal.php' ?>
                         <?php include 'partials/category-edit-modal.php' ?>
                     </tr>
-                <?php endwhile; ?>
+                    <?php $num++; endwhile; ?>
             </tbody>
         </table>
     </div>

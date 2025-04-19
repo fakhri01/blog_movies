@@ -1,4 +1,4 @@
-<footer class="bg-light mt-3 py-3">
+<footer class="bg-light py-3">
     <p class="mb-0 text-center">Developed by Fakhri</p>
 </footer>
 

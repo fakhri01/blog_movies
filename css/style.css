@@ -3,3 +3,28 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+
+main.error-page {
+  height: 100vh;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #343a40;
+}
+.error-container {
+  max-width: 500px;
+}
+.error-code {
+  font-size: 8rem;
+  font-weight: bold;
+}
+.btn-home {
+  margin-top: 20px;
+}
+
+span{
+  display: block;
+}
